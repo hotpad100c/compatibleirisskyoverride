@@ -6,8 +6,10 @@ import com.moulberry.flashback.state.EditorState;
 import com.moulberry.flashback.state.EditorStateManager;
 import com.moulberry.flashback.visuals.ReplayVisuals;
 import mypals.ml.CompatibleIrisSkyOverride;
+import net.irisshaders.iris.api.v0.IrisApi;
 import net.minecraft.client.render.*;
 import net.minecraft.client.util.Handle;
+import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.math.Vec3d;
 import org.joml.Matrix4f;
 import org.spongepowered.asm.mixin.Final;
@@ -24,7 +26,9 @@ import java.awt.*;
 public class LevelRendererMixin {
     @Shadow @Final private BufferBuilderStorage bufferBuilders;
 
-    @Inject(method = {"method_62215", "method_62212"}, require = 1,
+
+
+    @Inject(method = {"method_62215"}, require = 1,
             at = @At(value = "INVOKE",
                     target = "Lcom/mojang/blaze3d/systems/RenderSystem;setShaderFog" +
                             "(Lnet/minecraft/client/render/Fog;)V", shift = At.Shift.AFTER),
@@ -34,9 +38,25 @@ public class LevelRendererMixin {
         if (editorState != null) {
             ReplayVisuals visuals = editorState.replayVisuals;
             //CompatibleIrisSkyOverride.LOGGER.info("Checking if sky disc should be rendered: " + visuals.renderSky);
-            if(!visuals.renderSky){
+            if(!visuals.renderSky && IrisApi.getInstance().isShaderPackInUse()){
                 render(visuals.skyColour);
                 ci.cancel();
+            }
+        }
+    }
+    @Inject(method = "method_62212", require = 1,
+            at = @At(value = "INVOKE",
+                    target = "Lcom/mojang/blaze3d/systems/RenderSystem;setShaderFog" +
+                            "(Lnet/minecraft/client/render/Fog;)V", shift = At.Shift.AFTER),
+            cancellable = true)
+    private void renderCustomSky2(CallbackInfo ci) {
+        EditorState editorState = EditorStateManager.getCurrent();
+        if (editorState != null) {
+            ReplayVisuals visuals = editorState.replayVisuals;
+            //CompatibleIrisSkyOverride.LOGGER.info("Checking if sky disc should be rendered: " + visuals.renderSky);
+            if(!visuals.renderSky && IrisApi.getInstance().isShaderPackInUse()){
+                render(visuals.skyColour);
+                //ci.cancel();
             }
         }
     }
