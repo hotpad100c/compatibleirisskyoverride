@@ -8,8 +8,8 @@
 		"Ryan100c"
 	],
 	"contact": {
-		"homepage": "https://fabricmc.net/",
-		"sources": "https://github.com/FabricMC/fabric-example-mod"
+		"homepage": "https://github.com/hotpad100c/compatibleirisskyoverride",
+		"sources": "https://github.com/hotpad100c/compatibleirisskyoverride"
 	},
 	"license": "CC0-1.0",
 	"icon": "icon.png",
@@ -24,7 +24,7 @@
 	],
 	"depends": {
 		"fabricloader": ">=0.14.0",
-		"minecraft": "~1.21.4",
+		"minecraft": ">=1.21",
 		"java": ">=21",
 		"fabric-api": "*"
 	},

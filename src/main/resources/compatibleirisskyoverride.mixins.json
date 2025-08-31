@@ -3,7 +3,6 @@
 	"package": "mypals.ml.mixin",
 	"compatibilityLevel": "JAVA_21",
 	"mixins": [
-		"IrisRenderMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1
