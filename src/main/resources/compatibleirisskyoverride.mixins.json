@@ -1,17 +1,17 @@
 {
-	"required": true,
-	"package": "mypals.ml.mixin",
-	"compatibilityLevel": "JAVA_21",
-	"mixins": [
-		"IrisRenderMixin"
-	],
-	"injectors": {
-		"defaultRequire": 1
-	},
-	"overwrites": {
-		"requireAnnotations": true
-	},
-	"client": [
-		"LevelRendererMixin"
+  "required": true,
+  "package": "mypals.ml.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "IrisRenderingPipelineMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "overwrites": {
+    "requireAnnotations": true
+  },
+  "client": [
+    "LevelRendererMixin"
 	]
 }
