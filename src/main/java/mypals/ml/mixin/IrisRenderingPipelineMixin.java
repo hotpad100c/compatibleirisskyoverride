@@ -28,6 +28,9 @@ public class IrisRenderingPipelineMixin {
                 original.call(WorldRenderingPhase.NONE);
             }
         }
+        else{
+            original.call(phase);
+        }
     }
     @Unique
     private boolean isBlackListedPhase(WorldRenderingPhase phase){
