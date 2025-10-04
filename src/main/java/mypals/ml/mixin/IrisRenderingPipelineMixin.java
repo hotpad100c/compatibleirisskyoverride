@@ -27,6 +27,8 @@ public class IrisRenderingPipelineMixin {
             else{
                 original.call(WorldRenderingPhase.NONE);
             }
+        }else{
+            original.call(phase);
         }
     }
     @Unique
